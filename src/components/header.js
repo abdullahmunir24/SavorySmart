@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+
 
 export default function Header() {
   const [word, setWord] = useState('');
+  const [ingredients, setIngredients] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
+
 
   const handleSearch = () => {
     navigate(`/searched-recipe/${word}`);
   };
 
+  const handleIngSearch = () => {
+    navigate(`/searchedByIngredient-recipe/${ingredients}`);
+  };
+
   const handleChange = (event) => {
     setWord(event.target.value);
+  };
+
+  const handleIngChange = (event) => {
+    setIngredients(event.target.value);
   };
 
   useEffect(() => {
@@ -69,6 +79,34 @@ export default function Header() {
           </ul>
         </div>
       )}
+
+<input
+          type="search"
+          placeholder="Search by typing in ingredients eg. apples"
+          name="searchbar-ingredients"
+          value={ingredients}
+          onChange={handleIngChange}
+          className="bg-gray-800 rounded-lg focus:outline-none focus:bg-white focus:text-gray-900 w-full md:w-auto mb-3 md:mb-0"
+        />
+        <button
+          onClick={handleIngSearch}
+          className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded-lg text-base mt-4 md:mt-0"
+        >
+          Search by ingredients 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            className="w-4 h-4 ml-1"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+
     </header>
   );
 }
