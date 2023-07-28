@@ -1,0 +1,19 @@
+.title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .input {
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    width: 100%;
+    padding: 5px 0;
+  }
+  
+  .divider {
+    border-bottom-width: 1px;
+  }
+  

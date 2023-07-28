@@ -1,0 +1,31 @@
+.container {
+    top: 50px;
+  }
+  
+  .image {
+    width: 200px;
+    height: 200px;
+    margin: 20px 0;
+  }
+  
+  .uploadingContainer {
+    margin-top: 20px;
+  }
+  
+  .uploadingText {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .uploadProgress {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .errorText {
+    margin-top: 10px;
+    font-size: 16px;
+    color: red;
+  }
+      
