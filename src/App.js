@@ -17,9 +17,7 @@ function App() {
           path="/searchedByIngredient-recipe/:ingredients"
           element={<IngredientRecipes />}
         />
-        <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Registration />} />
-        <Route path="/Login" element={<LoginView />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );

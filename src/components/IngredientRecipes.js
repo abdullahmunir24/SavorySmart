@@ -11,7 +11,7 @@ export default function IngredientRecipes() {
 
   useEffect(() => {
     if (!ingredients) {
-      return; // No ingredients to search, return early
+      return; 
     }
 
     async function fetchRecipes() {
