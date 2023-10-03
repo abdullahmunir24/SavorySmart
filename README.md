@@ -77,11 +77,11 @@ npm start
  ```
 This will start the development server, and you can access the website at http://localhost:3000 in your web browser.
 
-Website Overview
+## Website Overview
 
 SavorySmart is designed to be your go-to platform for crafting, discovering, and sharing versatile recipes. Here's an overview of how the website works:
 
-Features
+## Features
 
 User Authentication:
 
@@ -113,7 +113,7 @@ API Integration
 
 SavorySmart integrates various APIs to provide you with accurate and up-to-date recipe information. These APIs ensure that you have access to a vast selection of recipes and reliable details.
 
-Contact
+## Contact
 
 If you have any questions or need assistance with the project, feel free to reach out to me:
 
