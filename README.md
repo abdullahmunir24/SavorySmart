@@ -4,20 +4,19 @@ Welcome to SavorySmart, your ultimate destination for crafting, discovering, and
 
 ## Table of Contents
 
-Table of Contents
-    * Getting Started
-    * Installation
-    * Running the Website
-* Website Overview
-    * Features
-    * User Authentication
-    * Recipe Search
-    * Recipe Display
-    * Ingredient Information
-    * Nutritional Analysis
-    * Customizable Meals
-* API Integration
-* Contact Information
+ * Getting Started
+ *  Installation
+ * Running the Website
+ * Website Overview
+ * Features
+ * User Authentication
+ * Recipe Search
+ * Recipe Display
+ * Ingredient Information
+ * Nutritional Analysis
+ * Customizable Meals
+ * API Integration
+ * Contact Information
   
 ## Getting Started
 
