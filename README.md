@@ -83,25 +83,31 @@ SavorySmart is designed to be your go-to platform for crafting, discovering, and
 
 Features
 
-User Authentication
+User Authentication:
+
 Users can sign up and log in to the website to access personalized features.
 User profiles store information about their favorite recipes and contributions.
 
-Recipe Search
+Recipe Search:
+
 Easily search for recipes by food name or ingredient.
 Get quick access to a wide variety of culinary creations.
 
-Recipe Display
+Recipe Display:
+
 View detailed recipe information, including preparation time, servings, and cooking instructions.
 Explore nutritional information to make informed choices.
 
-Ingredient Information
+Ingredient Information:
+
 Access comprehensive ingredient information, including details, substitutions, and culinary tips.
 
-Nutritional Analysis
+Nutritional Analysis:
+
 Get insights into the nutritional content of recipes, helping you make healthier choices.
 
-Customizable Meals
+Customizable Meals:
+
 Tailor recipes to your preferences, adjusting serving sizes and ingredient quantities.
 API Integration
 
