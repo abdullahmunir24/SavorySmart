@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import './Random.css'
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Random.css";
 
 export default function DisplayedRecipes() {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const { word } = useParams();
-  const navigate=useNavigate;
-
+  const navigate = useNavigate;
 
   const handleDetails = (recipeId) => {
     navigate(`/random-recipe/${recipeId}`);
@@ -18,7 +16,9 @@ export default function DisplayedRecipes() {
   useEffect(() => {
     async function fetchRecipes() {
       try {
-        const { data } = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${word}&apiKey=${process.env.REACT_APP_API_KEY}`);
+        const { data } = await axios.get(
+          `https://api.spoonacular.com/recipes/complexSearch?query=${word}&number=3&apiKey=${process.env.REACT_APP_API_KEY}`
+        );
         setSearchedRecipes(data.results);
       } catch (error) {
         console.log(error);
@@ -27,7 +27,7 @@ export default function DisplayedRecipes() {
     fetchRecipes();
   }, [word]);
 
-return (
+  return (
     <div>
       <div className="work-list">
         {searchedRecipes.map((recipe) => (
@@ -39,8 +39,10 @@ return (
               <Link to={`/random-recipe/${recipe.id}`}>
                 <i className="fas fa-external-link-alt"></i>
               </Link>
-              <i onClick={handleDetails} className="fas fa-external-link-alt"></i>
-
+              <i
+                onClick={handleDetails}
+                className="fas fa-external-link-alt"
+              ></i>
             </div>
           </div>
         ))}

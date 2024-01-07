@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import './Random.css';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "./Random.css";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function IngredientRecipes() {
   const { ingredients } = useParams();
@@ -11,12 +11,14 @@ export default function IngredientRecipes() {
 
   useEffect(() => {
     if (!ingredients) {
-      return; 
+      return;
     }
 
     async function fetchRecipes() {
       try {
-        const { data } = await axios.get(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=${process.env.REACT_APP_API_KEY}`);
+        const { data } = await axios.get(
+          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=4&apiKey=${process.env.REACT_APP_API_KEY}`
+        );
         console.log(data);
         setIngred(data);
       } catch (error) {
@@ -58,7 +60,10 @@ export default function IngredientRecipes() {
               <Link to={`/random-recipe/${recipe.id}`}>
                 <i className="fas fa-external-link-alt"></i>
               </Link>
-              <i onClick={() => handleInformation(recipe.id)} className="fas fa-external-link-alt"></i>
+              <i
+                onClick={() => handleInformation(recipe.id)}
+                className="fas fa-external-link-alt"
+              ></i>
             </div>
           </div>
         ))}

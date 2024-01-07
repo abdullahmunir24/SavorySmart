@@ -1,0 +1,96 @@
+.meal-plan-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 50px;
+  }
+  
+  .main-heading {
+    text-align: center;
+    color: #7f21eb;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body{
+    background-color: black;
+  }
+  
+  
+  
+  .weekly-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .day-plan {
+    margin: 20px 0;
+  }
+  
+  h2 {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+  }
+  
+  .meal-carousel {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .meal-item {
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  
+  h3 {
+    color: white;
+    font-size: 20px;
+  }
+  
+  .g-img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  p {
+    margin: 10px 0;
+  }
+  
+  .g-a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .g-a:hover {
+    text-decoration: underline;
+  }
+  
+  .input-box {
+    color: black !important;  
+    padding: 5px; 
+    margin: 5px; 
+  }
+  
+  
+
+

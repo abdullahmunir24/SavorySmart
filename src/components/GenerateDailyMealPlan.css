@@ -1,0 +1,76 @@
+.main-heading {
+  text-align: center;
+  color: red;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #7f21eb;
+  color: #fff;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #6c13d1;
+}
+
+.meal-item {
+  text-align: center;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
+  border-radius: 10px;
+  background-color: #fff;
+  width: 300px;
+  position: relative;
+}
+
+h3 {
+  color: white;
+  font-size: 20px;
+}
+
+img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+  transition: transform 0.5s;
+}
+
+.meal-item:hover img {
+  transform: scale(1.1);
+}
+
+p {
+  margin: 10px 0;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.input-box {
+  color: black !important;  
+  padding: 5px; 
+  margin: 5px; 
+}
+

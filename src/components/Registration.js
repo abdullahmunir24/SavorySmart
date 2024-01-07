@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, getDoc, setDoc, doc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { FIREBASE_AUTH, FIRESTORE_DB } from "../FirebaseConfig";
+import { connectUserToSpoonacular } from "./Spoonacular";
 import "./Registration.css";
 import InputStuff from "../snippets/InputStuff";
-import Birthday from "../snippets/Birthday";
-import UploadImage from "../snippets/UplaodImage";
+import { useNavigate } from "react-router-dom";
+import Header from "./header";
 
 export default function Registration() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ export default function Registration() {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [InputError, setInputError] = useState("");
   const [UserId, setUserId] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (password !== confirmpassword && confirmpassword !== "") {
@@ -70,9 +72,20 @@ export default function Registration() {
       });
 
       setUserId(user.uid);
-      console.log(UserId);
+
+      const spoonacularInfo = await connectUserToSpoonacular({
+        username: `user_${user.uid}`,
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+      });
+
+      console.log("Spoonacular Info:", spoonacularInfo);
 
       alert("Your account has been created");
+
+      navigate("/mealplanner");
+
       setEmail("");
       setFirstname("");
       setLastname("");
@@ -97,76 +110,81 @@ export default function Registration() {
   };
 
   return (
-    <div className="container">
-      <img src={require("../Images/SS.png")} className="image" alt="UBC logo" />
+    <div>
+      <Header />
+      <div className="container registration-container">
+        <img
+          src={require("../Images/SS.png")}
+          className="image"
+          alt="UBC logo"
+        />
 
-      <div className="formContainer">
-        <div className="inputContainer">
-          <InputStuff
-            value={firstname}
-            title="First Name"
-            placeholder="Enter First Name"
-            onChangeText={setFirstname}
-          />
+        <div className="formContainer">
+          <div className="inputContainer">
+            <InputStuff
+              value={firstname}
+              title="First Name"
+              placeholder="Enter First Name"
+              onChangeText={setFirstname}
+            />
+          </div>
+
+          <div className="inputContainer">
+            <InputStuff
+              value={lastname}
+              title="Last Name"
+              placeholder="Enter Last Name"
+              onChangeText={setLastname}
+            />
+          </div>
+
+          <div className="inputContainer">
+            <InputStuff
+              value={email}
+              title="Email Address"
+              placeholder="examplename@gmail.com"
+              onChangeText={setEmail}
+            />
+          </div>
+
+          <div className="inputContainer">
+            <InputStuff
+              value={password}
+              title="Password"
+              placeholder="Enter Password"
+              isSecure={true}
+              onChangeText={setPassword}
+            />
+          </div>
+
+          <div className="confirmPasswordContainer">
+            <InputStuff
+              value={confirmpassword}
+              title="Confirm Password"
+              placeholder="Reenter Password"
+              isSecure={true}
+              onChangeText={setConfirmPassword}
+            />
+          </div>
+
+          <button
+            className={["button", isFormValid() ? null : "disabledButton"].join(
+              " "
+            )}
+            onClick={signUp}
+            disabled={!isFormValid()}
+          >
+            <span className="buttonText">Sign Up</span>
+          </button>
         </div>
 
-        <div className="inputContainer">
-          <InputStuff
-            value={lastname}
-            title="Last Name"
-            placeholder="Enter Last Name"
-            onChangeText={setLastname}
-          />
-        </div>
-
-        <div className="inputContainer">
-          <InputStuff
-            value={email}
-            title="Email Address"
-            placeholder="examplename@gmail.com"
-            onChangeText={setEmail}
-          />
-        </div>
-
-        <div className="inputContainer">
-          <InputStuff
-            value={password}
-            title="Password"
-            placeholder="Enter Password"
-            isSecure={true}
-            onChangeText={setPassword}
-          />
-        </div>
-
-        <div className="confirmPasswordContainer">
-          <InputStuff
-            value={confirmpassword}
-            title="Confirm Password"
-            placeholder="Reenter Password"
-            isSecure={true}
-            onChangeText={setConfirmPassword}
-          />
-        </div>
-
-        <Birthday />
-        <UploadImage />
-
-        <button
-          className={["button", isFormValid() ? null : "disabledButton"].join(
-            " "
-          )}
-          onClick={signUp}
-          disabled={!isFormValid()}
-        >
-          <span className="buttonText">Sign Up</span>
+        <button>
+          <div className="signInButton" onClick={() => navigate("/Login")}>
+            <span className="signInButtonText">
+              If you already have an account, please sign in
+            </span>
+          </div>
         </button>
-      </div>
-
-      <div className="signInButton" onClick={() => "/Login"}>
-        <span className="signInButtonText">
-          If you already have an account, please sign in
-        </span>
-        <span className="errorMessage">{InputError}</span>
       </div>
     </div>
   );
