@@ -11,7 +11,7 @@ const MealPlanner = () => {
   const [detailedMealPlan, setDetailedMealPlan] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  // testing
   const fetchAllData = async () => {
     try {
       const mealPlanDocRef = doc(FIRESTORE_DB, "users", currentUser.uid);

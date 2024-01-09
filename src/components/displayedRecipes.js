@@ -17,7 +17,7 @@ export default function DisplayedRecipes() {
     async function fetchRecipes() {
       try {
         const { data } = await axios.get(
-          `https://api.spoonacular.com/recipes/complexSearch?query=${word}&number=3&apiKey=${process.env.REACT_APP_API_KEY}`
+          `https://api.spoonacular.com/recipes/complexSearch?query=${word}&number=3 &apiKey=${process.env.REACT_APP_API_KEY}`
         );
         setSearchedRecipes(data.results);
       } catch (error) {
