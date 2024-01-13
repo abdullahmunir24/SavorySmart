@@ -49,7 +49,7 @@ export default function Header() {
   };
 
   const handlesaved = () => {
-    navigate("/meal-planner");
+    navigate("/mealplanner");
   };
 
   const handlerestuarant = () => {

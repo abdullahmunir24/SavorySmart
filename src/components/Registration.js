@@ -73,6 +73,7 @@ export default function Registration() {
 
       setUserId(user.uid);
 
+      // Connect user to Spoonacular
       const spoonacularInfo = await connectUserToSpoonacular({
         username: `user_${user.uid}`,
         firstName: firstname,
@@ -81,6 +82,14 @@ export default function Registration() {
       });
 
       console.log("Spoonacular Info:", spoonacularInfo);
+
+      // Check for unauthorized response
+      if (
+        spoonacularInfo.status === "failure" &&
+        spoonacularInfo.code === 401
+      ) {
+        throw new Error("Spoonacular connection failed: Unauthorized");
+      }
 
       alert("Your account has been created");
 
@@ -92,7 +101,7 @@ export default function Registration() {
       setPassword("");
       setConfirmPassword("");
     } catch (error) {
-      console.log(error);
+      console.error("Registration failed:", error);
       alert("Sign up failed: " + error.message);
     }
   };

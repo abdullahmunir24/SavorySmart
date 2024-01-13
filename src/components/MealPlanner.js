@@ -11,9 +11,14 @@ const MealPlanner = () => {
   const [detailedMealPlan, setDetailedMealPlan] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  // testing
+
   const fetchAllData = async () => {
     try {
+      if (!currentUser || !currentUser.uid) {
+        setLoading(false);
+        return;
+      }
+
       const mealPlanDocRef = doc(FIRESTORE_DB, "users", currentUser.uid);
       const mealPlanDocSnapshot = await getDoc(mealPlanDocRef);
 
@@ -45,22 +50,34 @@ const MealPlanner = () => {
     try {
       const userDocRef = doc(FIRESTORE_DB, "users", currentUser.uid);
       const userDocSnapshot = await getDoc(userDocRef);
-      const mealPlan = userDocSnapshot.data().mealPlan || { recipes: [] };
-      const updatedMealPlan = {
-        recipes: mealPlan.recipes.filter(
-          (recipe) => recipe.recipeId !== recipeId
-        ),
-      };
 
-      await deleteDoc(userDocRef);
-      await setDoc(userDocRef, { mealPlan: updatedMealPlan }, { merge: true });
+      if (userDocSnapshot.exists()) {
+        const mealPlan = userDocSnapshot.data().mealPlan || { recipes: [] };
+        const updatedMealPlan = {
+          recipes: mealPlan.recipes.filter(
+            (recipe) => recipe.recipeId !== recipeId
+          ),
+        };
 
-      console.log("Recipe removed from meal plan:", recipeId);
+        await setDoc(
+          userDocRef,
+          { mealPlan: updatedMealPlan },
+          { merge: true }
+        );
 
-      fetchAllData();
+        console.log("Recipe removed from meal plan:", recipeId);
+
+        fetchAllData(); // Optional: You can update the local state without making a new request to Firestore
+      } else {
+        console.error("User document not found for removal");
+      }
     } catch (error) {
       console.error("Error removing from meal plan:", error);
     }
+  };
+
+  const handleSignOut = () => {
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -86,7 +103,7 @@ const MealPlanner = () => {
           </div>
           <div className="flex flex-wrap -m-4">
             {detailedMealPlan.map((recipe) => (
-              <div key={recipe.id} className="xl:w-1/4 md:w-1/2 p-4">
+              <div key={recipe.recipeId} className="xl:w-1/4 md:w-1/2 p-4">
                 <div className="bg-gray-100 p-6 rounded-lg">
                   <img
                     className="h-40 rounded w-full object-cover object-center mb-6"
@@ -122,10 +139,9 @@ const MealPlanner = () => {
                     </button>
                   </Link>
 
-                  {/* Remove from Saved Button */}
                   <button
                     className="button removeFromSavedButton"
-                    onClick={() => removeFromSaved(recipe.id)}
+                    onClick={() => removeFromSaved(recipe.recipeId)}
                   >
                     <span className="buttonText">Remove from Saved</span>
                   </button>
@@ -135,6 +151,9 @@ const MealPlanner = () => {
           </div>
         </div>
       </section>
+      <button className="button signOutButton" onClick={handleSignOut}>
+        <span className="buttonText">Sign Out</span>
+      </button>
     </div>
   );
 };
