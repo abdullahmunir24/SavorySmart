@@ -6,12 +6,13 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import InputStuff from "../snippets/InputStuff";
 import { useNavigate } from "react-router-dom";
 import "./LoginView.css";
+import Header from "./header";
 
 export default function LoginView() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = FIREBASE_AUTH;
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const signIn = async () => {
     try {
@@ -59,44 +60,53 @@ export default function LoginView() {
   };
 
   return (
-    <div className="container">
-      <img src={require("../Images/SS.png")} className="image" alt="UBC logo" />
+    <div>
+      <Header />
+      <div className="container">
+        <img
+          src={require("../Images/SS.png")}
+          className="image"
+          alt="UBC logo"
+        />
 
-      <div className="formContainer">
-        <div className="inputContainer">
-          <InputStuff
-            value={email}
-            title="Email Address"
-            placeholder="examplename@gmail.com"
-            onChangeText={setEmail}
-          />
+        <div className="formContainer">
+          <div className="inputContainer">
+            <InputStuff
+              value={email}
+              title="Email Address"
+              placeholder="examplename@gmail.com"
+              onChangeText={setEmail}
+            />
+          </div>
+
+          <div className="inputContainer">
+            <InputStuff
+              value={password}
+              title="Password"
+              placeholder="Enter Password"
+              isSecure={true}
+              onChangeText={setPassword}
+            />
+          </div>
         </div>
 
-        <div className="inputContainer">
-          <InputStuff
-            value={password}
-            title="Password"
-            placeholder="Enter Password"
-            isSecure={true}
-            onChangeText={setPassword}
-          />
-        </div>
+        <button
+          className={isFormValid() ? "button" : "disabledButton"}
+          onClick={handleLogin}
+          disabled={!isFormValid()}
+        >
+          <span className="buttonText">Log In</span>
+        </button>
+
+        <button
+          className="signUpButton"
+          onClick={() => navigate("/register-user")}
+        >
+          <span className="signUpButtonText">
+            Don't have an account? Sign up
+          </span>
+        </button>
       </div>
-
-      <button
-        className={isFormValid() ? "button" : "disabledButton"}
-        onClick={handleLogin}
-        disabled={!isFormValid()}
-      >
-        <span className="buttonText">Log In</span>
-      </button>
-
-      <button
-        className="signUpButton"
-        onClick={() => navigate("/register-user")}
-      >
-        <span className="signUpButtonText">Don't have an account? Sign up</span>
-      </button>
     </div>
   );
 }

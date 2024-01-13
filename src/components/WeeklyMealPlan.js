@@ -74,34 +74,6 @@ const GenerateWeeklyMealPlan = () => {
     }
   };
 
-  const addRecipeToMealPlan = async (selectedRecipe) => {
-    try {
-      const { currentUser } = FIREBASE_AUTH;
-
-      const userDocRef = doc(FIRESTORE_DB, "users", currentUser.uid);
-      const userDocSnapshot = await getDoc(userDocRef);
-
-      if (!userDocSnapshot.exists()) {
-        console.error("User document not found");
-        return;
-      }
-
-      const mealPlan = userDocSnapshot.data().mealPlan || { recipes: [] };
-
-      mealPlan.recipes.push({
-        recipeId: selectedRecipe.id,
-        title: selectedRecipe.title,
-        imageType: selectedRecipe.imageType,
-      });
-
-      await setDoc(userDocRef, { mealPlan }, { merge: true });
-
-      console.log("Recipe added to meal plan:", selectedRecipe);
-    } catch (error) {
-      console.error("Error adding to meal plan:", error);
-    }
-  };
-
   return (
     <div>
       <Header />
@@ -162,7 +134,6 @@ const GenerateWeeklyMealPlan = () => {
                     <p>Ready in {meal.readyInMinutes} minutes</p>
                     <p>Servings: {meal.servings}</p>
 
-                    {/* Display Nutrient Information */}
                     {meal.nutrients && (
                       <div className="nutrient-info">
                         <p>Calories: {meal.nutrients.calories.toFixed(2)}</p>
@@ -180,12 +151,6 @@ const GenerateWeeklyMealPlan = () => {
                       onClick={() => navigate(`/random-recipe/${meal.id}`)}
                     >
                       <span className="buttonText">View Recipe</span>
-                    </button>
-                    <button
-                      className="button addToPlanButton"
-                      onClick={() => addRecipeToMealPlan(meal)}
-                    >
-                      <span className="buttonText">Add to Meal Plan</span>
                     </button>
                   </div>
                 ))}
