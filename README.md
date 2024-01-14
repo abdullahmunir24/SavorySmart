@@ -1,5 +1,7 @@
 # SavorySmart - Crafting a Versatile Recipe Website
 
+https://savorysmart.netlify.app
+
 Welcome to SavorySmart, your ultimate destination for crafting, discovering, and sharing versatile recipes. SavorySmart is built using **React**, **Firebase**, and leverages various APIs to offer you an exceptional culinary experience. Whether you're looking for recipe inspiration, nutritional information, generating you meal plans or searching for nearby restuarants.
 
 ## Table of Contents
@@ -106,7 +108,6 @@ If you have any questions or need assistance with the project, feel free to reac
 Abdullah Munir  
 
 GitHub: abdullahmunir24  
-
 
 Email: abdullahmunir2004@gmail.com
 
