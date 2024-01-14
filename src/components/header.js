@@ -57,13 +57,13 @@ export default function Header() {
   };
 
   const handlecontact = () => {
-    navigate("/");
+    navigate("/contact");
   };
 
   return (
     <header
       className="text-gray-400 bg-gray-900 body-font"
-      style={{ marginBottom: "-150px" }}
+      style={{ marginBottom: "-100px" }}
     >
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <div className="flex items-center justify-between w-full md:w-auto">
@@ -74,12 +74,7 @@ export default function Header() {
             >
               Home
             </button>
-            <button
-              onClick={handleabout}
-              className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded-lg text-base ml-4"
-            >
-              About
-            </button>
+
             <button
               onClick={handledaily}
               className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded-lg text-base ml-4"
@@ -96,7 +91,7 @@ export default function Header() {
               onClick={handlesaved}
               className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded-lg text-base ml-4"
             >
-              Saved Recipes
+              Your Dashboard
             </button>
             <button
               onClick={handlerestuarant}

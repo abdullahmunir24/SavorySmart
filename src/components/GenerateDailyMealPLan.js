@@ -31,16 +31,13 @@ const GenerateMealPlanDaily = () => {
         console.error("User document not found");
         return;
       }
-
-      // ... (rest of the function remains unchanged)
     } catch (error) {
       console.error("Error generating meal plan:", error);
     }
   };
 
-  // Render the component only if the user is authenticated
   if (!isAuthenticated) {
-    return null; // or you can render a loading indicator, a login form, or any other component
+    return null;
   }
 
   return (

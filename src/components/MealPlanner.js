@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FIREBASE_AUTH, FIRESTORE_DB } from "../FirebaseConfig";
 import { getDoc, doc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./header";
 
@@ -35,8 +35,13 @@ const MealPlanner = () => {
     };
   }, []);
 
-  const handleSignOut = () => {
-    navigate("/login");
+  const handleSignOut = async () => {
+    try {
+      await signOut(FIREBASE_AUTH);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
   };
 
   if (loading) {

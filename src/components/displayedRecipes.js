@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import "./Random.css";
+import Header from "./header";
 
 export default function DisplayedRecipes() {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const { word } = useParams();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleDetails = (recipeId) => {
     navigate(`/random-recipe/${recipeId}`);
@@ -17,7 +17,7 @@ export default function DisplayedRecipes() {
     async function fetchRecipes() {
       try {
         const { data } = await axios.get(
-          `https://api.spoonacular.com/recipes/complexSearch?query=${word}&number=3 &apiKey=${process.env.REACT_APP_API_KEY}`
+          `https://api.spoonacular.com/recipes/complexSearch?query=${word}&number=6&apiKey=${process.env.REACT_APP_API_KEY_meal}`
         );
         setSearchedRecipes(data.results);
       } catch (error) {
@@ -29,20 +29,21 @@ export default function DisplayedRecipes() {
 
   return (
     <div>
+      <Header />
       <div className="work-list">
         {searchedRecipes.map((recipe) => (
           <div className="work" key={recipe.id}>
             <img src={recipe.image} alt={recipe.title} />
             <div className="layer">
               <h3>{recipe.title}</h3>
-              <p>Additional details or description of the recipe</p>
               <Link to={`/random-recipe/${recipe.id}`}>
-                <i className="fas fa-external-link-alt"></i>
+                <button
+                  className="button"
+                  style={{ width: "120px", margin: "-10px 0 0 -20px" }}
+                >
+                  <span className="buttonText">View Recipe</span>
+                </button>
               </Link>
-              <i
-                onClick={handleDetails}
-                className="fas fa-external-link-alt"
-              ></i>
             </div>
           </div>
         ))}

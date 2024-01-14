@@ -6,13 +6,13 @@
   }
   
   .image {
-    width: 130px;
-    height: 110px;
-    padding: 20px;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
   }
   
   .formContainer {
-    margin-top: 80px;
+    margin-top: 20px;
   }
   
   .inputContainer {
@@ -24,7 +24,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: yellow;
     padding: 10px;
     border-radius: 10px;
     border: none;
@@ -53,5 +53,9 @@
   .signUpButtonText {
     text-align: center;
     text-decoration-line: underline;
+  }
+
+  h5{
+    color : white !important;
   }
   

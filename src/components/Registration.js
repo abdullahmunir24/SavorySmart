@@ -73,7 +73,6 @@ export default function Registration() {
 
       setUserId(user.uid);
 
-      // Connect user to Spoonacular
       const spoonacularInfo = await connectUserToSpoonacular({
         username: `user_${user.uid}`,
         firstName: firstname,
@@ -83,7 +82,6 @@ export default function Registration() {
 
       console.log("Spoonacular Info:", spoonacularInfo);
 
-      // Check for unauthorized response
       if (
         spoonacularInfo.status === "failure" &&
         spoonacularInfo.code === 401
@@ -164,6 +162,9 @@ export default function Registration() {
               isSecure={true}
               onChangeText={setPassword}
             />
+            {password.length > 0 && password.length < 6 && (
+              <h5>Password should be at least 6 characters.</h5>
+            )}
           </div>
 
           <div className="confirmPasswordContainer">
@@ -175,6 +176,9 @@ export default function Registration() {
               onChangeText={setConfirmPassword}
             />
           </div>
+          {confirmpassword.length > 0 && password !== confirmpassword && (
+            <h5>Passwords do not match.</h5>
+          )}
 
           <button
             className={["button", isFormValid() ? null : "disabledButton"].join(

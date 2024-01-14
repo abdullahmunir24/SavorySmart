@@ -10,6 +10,7 @@ import MealPlanner from "./components/MealPlanner";
 import GenerateDailyMealPlan from "./components/GenerateDailyMealPLan";
 import WeeklyMealPlan from "./components/WeeklyMealPlan";
 import Restaurant from "./components/Restaurant";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
         <Route path="/generate-week-meal-plan" element={<WeeklyMealPlan />} />
 
         <Route path="/" element={<Home />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="/contact" element={<Contact />} />
 
         <Route
           path="/searchedByIngredient-recipe/:ingredients"

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Random.css";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import Header from "./header";
 
 export default function IngredientRecipes() {
   const { ingredients } = useParams();
@@ -17,7 +17,7 @@ export default function IngredientRecipes() {
     async function fetchRecipes() {
       try {
         const { data } = await axios.get(
-          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=4&apiKey=${process.env.REACT_APP_API_KEY}`
+          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=6&apiKey=${process.env.REACT_APP_API_KEY_meal}`
         );
         console.log(data);
         setIngred(data);
@@ -39,31 +39,33 @@ export default function IngredientRecipes() {
 
   return (
     <div>
+      <Header />
       <div className="work-list">
         {ingred.map((recipe) => (
           <div className="work" key={recipe.id}>
             <img src={recipe.image} alt={recipe.title} />
             <div className="layer">
               <h3>{recipe.title}</h3>
-              <p>Used Ingredients:</p>
-              <ul>
+              <h4 style={{ color: "blue" }}>Used Ingredients:</h4>
+              <ul style={{ color: "white" }}>
                 {recipe.usedIngredients.map((ingredient) => (
                   <li key={ingredient.id}>{ingredient.name}</li>
                 ))}
               </ul>
-              <p>Unused Ingredients:</p>
-              <ul>
+              <h4 style={{ color: "blue" }}>Unused Ingredients:</h4>
+              <ul style={{ color: "white" }}>
                 {recipe.missedIngredients.map((ingredient) => (
                   <li key={ingredient.id}>{ingredient.name}</li>
                 ))}
               </ul>
               <Link to={`/random-recipe/${recipe.id}`}>
-                <i className="fas fa-external-link-alt"></i>
+                <button
+                  className="button"
+                  style={{ width: "120px", margin: "-10px 0 0 -20px" }}
+                >
+                  <span className="buttonText">View Recipe</span>
+                </button>
               </Link>
-              <i
-                onClick={() => handleInformation(recipe.id)}
-                className="fas fa-external-link-alt"
-              ></i>
             </div>
           </div>
         ))}

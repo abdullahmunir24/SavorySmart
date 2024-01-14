@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FIREBASE_AUTH, FIRESTORE_DB } from "../FirebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
@@ -22,6 +22,18 @@ const GenerateWeeklyMealPlan = () => {
   const [exclude, setExclude] = useState("");
   const [weeklyMealPlan, setWeeklyMealPlan] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const user = FIREBASE_AUTH.currentUser;
+
+      if (!user) {
+        navigate("/mealplanner");
+      }
+    };
+
+    checkAuthentication();
+  }, [navigate]);
 
   const handleGenerateMealPlan = async () => {
     try {
@@ -53,7 +65,7 @@ const GenerateWeeklyMealPlan = () => {
               targetCalories,
               diet,
               exclude,
-              apiKey: `${process.env.REACT_APP_API_KEY}`,
+              apiKey: `${process.env.REACT_APP_API_KEY_generate}`,
             },
           }
         );
@@ -133,7 +145,6 @@ const GenerateWeeklyMealPlan = () => {
                     <p>{meal.title}</p>
                     <p>Ready in {meal.readyInMinutes} minutes</p>
                     <p>Servings: {meal.servings}</p>
-
                     {meal.nutrients && (
                       <div className="nutrient-info">
                         <p>Calories: {meal.nutrients.calories.toFixed(2)}</p>
@@ -145,13 +156,12 @@ const GenerateWeeklyMealPlan = () => {
                         <p>Protein: {meal.nutrients.protein.toFixed(2)}</p>
                       </div>
                     )}
-
                     <button
                       className="button viewRecipeButton"
                       onClick={() => navigate(`/random-recipe/${meal.id}`)}
                     >
                       <span className="buttonText">View Recipe</span>
-                    </button>
+                    </button>{" "}
                   </div>
                 ))}
               </div>

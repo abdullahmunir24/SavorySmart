@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH, FIRESTORE_DB } from "../FirebaseConfig";
-import { AntDesign } from "react-icons/ai";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import InputStuff from "../snippets/InputStuff";
 import { useNavigate } from "react-router-dom";
@@ -21,11 +20,12 @@ export default function LoginView() {
       const idToken = await user.getIdToken();
       console.log("Firebase ID token:", idToken);
       alert("Logged in successfully");
-      setEmail("");
-      setPassword("");
+      navigate("/mealplanner");
     } catch (error) {
       console.log(error);
-      alert("Sign in failed: " + error.message);
+      alert(
+        "Sign in failed. Please check your email and password and try again."
+      );
     }
   };
 
@@ -87,11 +87,16 @@ export default function LoginView() {
               isSecure={true}
               onChangeText={setPassword}
             />
+            {password.length > 0 && password.length < 6 && (
+              <h5>Password should be at least 6 characters.</h5>
+            )}
           </div>
         </div>
 
         <button
-          className={isFormValid() ? "button" : "disabledButton"}
+          className={["button", isFormValid() ? null : "disabledButton"].join(
+            " "
+          )}
           onClick={handleLogin}
           disabled={!isFormValid()}
         >

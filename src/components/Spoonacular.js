@@ -9,7 +9,7 @@ export const connectUserToSpoonacular = async (userData) => {
       userData,
       {
         params: {
-          apiKey: `${process.env.REACT_APP_API_KEY}`,
+          apiKey: `${process.env.REACT_APP_API_KEY_generate}`,
         },
       }
     );
@@ -19,7 +19,6 @@ export const connectUserToSpoonacular = async (userData) => {
     const { currentUser } = FIREBASE_AUTH;
     const userDocRef = doc(FIRESTORE_DB, "users", currentUser.uid);
 
-    // Update user data (firstName, lastName, email) or add additional fields as needed
     await setDoc(
       userDocRef,
       {
@@ -30,7 +29,6 @@ export const connectUserToSpoonacular = async (userData) => {
       { merge: true }
     );
 
-    // Create or update the "spoonacular" map
     await setDoc(
       userDocRef,
       { spoonacular: { hash, spoonacularPassword, username } },
