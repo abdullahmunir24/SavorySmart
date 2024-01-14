@@ -1,35 +1,6 @@
 # SavorySmart - Crafting a Versatile Recipe Website
 
 Welcome to SavorySmart, your ultimate destination for crafting, discovering, and sharing versatile recipes. SavorySmart is built using **React**, **Firebase**, and leverages various APIs to offer you an exceptional culinary experience. Whether you're looking for recipe inspiration, nutritional information, generating you meal plans or searching for nearby restuarants.
-## Table of Contents
-
- * Getting Started
- *  Installation
- * Running the Website
- * Website Overview
- * Features
- * User Authentication
- * Recipe Search
- * Recipe Display
- * Ingredient Information
- * Nutritional Analysis
- * Customizable Meals
- * API Integration
- * Contact Information
-  
-## Getting Started
-
-### Installation
-
-Before you can use SavorySmart, make sure you have **Node.js** and **npm** (Node Package Manager) installed on your machine. Then, follow these steps:
-
-1. Clone this repository to your local machine:
-
-   ```bash
-   git clone https://github.com/your-username/savory-smart-website.git
-# SavorySmart - Crafting a Versatile Recipe Website
-
-Welcome to SavorySmart, your ultimate destination for crafting, discovering, and sharing versatile recipes. SavorySmart is built using **React**, **Firebase**, and leverages various APIs to offer you an exceptional culinary experience. Whether you're looking for recipe inspiration, nutritional information, or a platform to share your own culinary creations, SavorySmart has it all.
 
 ## Table of Contents
 
@@ -45,6 +16,9 @@ Recipe Display
 Ingredient Information
 Nutritional Analysis
 Customizable Meals
+Generating Daily Meal Plans 
+Generating Weekly Meal Plans
+Nearby Restaurants
 API Integration
 Contact Information
 
