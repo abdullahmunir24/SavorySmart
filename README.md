@@ -31,11 +31,11 @@ Before you can use SavorySmart, make sure you have **Node.js** and **npm** (Node
 Clone this repository to your local machine:
 
    ```
-git clone https://github.com/your-username/savory-smart-website.git
+git clone https://github.com/your-username/SavorySmart.git
    ```
 Change directory to the project's root folder:
  ```
-cd savory-smart-website
+cd SavorySmart
  ```
 Install the project's dependencies:
 
@@ -82,7 +82,20 @@ Get insights into the nutritional content of recipes, helping you make healthier
 Customizable Meals:
 
 Tailor recipes to your preferences, adjusting serving sizes and ingredient quantities.
-API Integration
+
+Daily Meal Plan:
+
+Generate a day's worth of meals tailored to your calorie goal and dietary preferences. Simply input your target calorie count and preferred diet, and let the Meal Planner do the rest.
+
+Weekly Meal Plan:
+
+For those planning ahead, our Weekly Meal Planner provides a comprehensive meal plan for the entire week. Set your weekly calorie target and dietary preferences to receive a diverse and balanced meal plan.
+
+Nearby Restaurants:
+
+Discover nearby restaurants that align with your chosen diet. Whether you're looking for keto-friendly options, vegetarian delights, or any other specific diet, our tool helps you find restaurants catering to your needs.
+
+API Integration:
 
 SavorySmart integrates various APIs to provide you with accurate and up-to-date recipe information. These APIs ensure that you have access to a vast selection of recipes and reliable details.
 
@@ -90,8 +103,11 @@ SavorySmart integrates various APIs to provide you with accurate and up-to-date 
 
 If you have any questions or need assistance with the project, feel free to reach out to me:
 
-Abdullah Munir
-GitHub: abdullahmunir24
+Abdullah Munir  
+
+GitHub: abdullahmunir24  
+
+
 Email: abdullahmunir2004@gmail.com
 
-Thank you for choosing SavorySmart. We hope it brings culinary creativity and joy to your life, making your cooking experience both exciting and delicious!
+Thank you for choosing SavorySmart. I hope it brings culinary creativity and joy to your life, making your cooking experience both exciting and delicious!
