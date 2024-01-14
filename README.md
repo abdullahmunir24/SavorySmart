@@ -1,7 +1,6 @@
 # SavorySmart - Crafting a Versatile Recipe Website
 
-Welcome to SavorySmart, your ultimate destination for crafting, discovering, and sharing versatile recipes. SavorySmart is built using **React**, **Firebase**, and leverages various APIs to offer you an exceptional culinary experience. Whether you're looking for recipe inspiration, nutritional information, or a platform to share your own culinary creations, SavorySmart has it all.
-
+Welcome to SavorySmart, your ultimate destination for crafting, discovering, and sharing versatile recipes. SavorySmart is built using **React**, **Firebase**, and leverages various APIs to offer you an exceptional culinary experience. Whether you're looking for recipe inspiration, nutritional information, generating you meal plans or searching for nearby restuarants.
 ## Table of Contents
 
  * Getting Started
