@@ -63,6 +63,11 @@ const MealPlanner = () => {
                 <span className="buttonText">Sign Up</span>
               </button>
             </Link>
+            <Link to="/Login">
+              <button className="button signUpButton">
+                <span className="buttonText">Log In</span>
+              </button>
+            </Link>
           </div>
         </section>
       </div>

@@ -147,6 +147,21 @@ export default function Contact() {
           ></iframe>
         </div>
       </section>
+
+      <div className="new-content-container">
+        <p className="c-info">&copy; 2023 Abdullah Munir</p>
+        <p className="c-info">
+          Website hosted on{" "}
+          <a
+            href="https://www.netlify.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "white", textDecoration: "underline" }}
+          >
+            Netlify
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

@@ -11,6 +11,7 @@ const GenerateMealPlanDaily = () => {
   const [diet, setDiet] = useState("vegetarian");
   const [exclude, setExclude] = useState("");
   const [mealPlan, setMealPlan] = useState([]);
+  const [totalNutrients, setTotalNutrients] = useState(null);
   const navigate = useNavigate();
 
   const isAuthenticated = FIREBASE_AUTH.currentUser !== null;
@@ -31,6 +32,28 @@ const GenerateMealPlanDaily = () => {
         console.error("User document not found");
         return;
       }
+
+      const response = await axios.get(
+        "https://api.spoonacular.com/mealplanner/generate",
+        {
+          params: {
+            timeFrame: "day",
+            targetCalories,
+            diet,
+            exclude,
+            apiKey: `${process.env.REACT_APP_API_KEY_generate}`,
+          },
+        }
+      );
+
+      const { meals, nutrients } = response.data;
+
+      const enrichedMeals = meals.map((meal) => ({
+        ...meal,
+      }));
+
+      setMealPlan(enrichedMeals);
+      setTotalNutrients(nutrients);
     } catch (error) {
       console.error("Error generating meal plan:", error);
     }
@@ -39,6 +62,19 @@ const GenerateMealPlanDaily = () => {
   if (!isAuthenticated) {
     return null;
   }
+
+  const dietOptions = [
+    "Gluten Free",
+    "Ketogenic",
+    "Vegetarian",
+    "Vegetarian with dairy",
+    "Vegetarian with egg",
+    "Vegan",
+    "Vegetarian with fish, seafood",
+    "Meat,vegetables,nuts exculding grains",
+    "Meat,vegetables,including dairy",
+    "Whole Foods",
+  ];
 
   return (
     <div>
@@ -56,13 +92,18 @@ const GenerateMealPlanDaily = () => {
             />
           </label>
           <label>
-            Diet (e.g vegetarian, chicken):
-            <input
-              type="text"
+            Diet:
+            <select
               value={diet}
               onChange={(e) => setDiet(e.target.value)}
-              className="input-box"
-            />
+              style={{ color: "black" }}
+            >
+              {dietOptions.map((option) => (
+                <option key={option} value={option.toLowerCase()}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </label>
           <label>
             Exclude from diet (e.g shellfish, olives):
@@ -99,17 +140,6 @@ const GenerateMealPlanDaily = () => {
                   <p>{meal.title}</p>
                   <p>Ready in {meal.readyInMinutes} minutes</p>
                   <p>Servings: {meal.servings}</p>
-
-                  {meal.nutrients && (
-                    <div className="nutrient-info">
-                      <p>Calories: {meal.nutrients.calories.toFixed(2)}</p>
-                      <p>
-                        Carbohydrates: {meal.nutrients.carbohydrates.toFixed(2)}
-                      </p>
-                      <p>Fat: {meal.nutrients.fat.toFixed(2)}</p>
-                      <p>Protein: {meal.nutrients.protein.toFixed(2)}</p>
-                    </div>
-                  )}
                   <button
                     className="button viewRecipeButton"
                     onClick={() => navigate(`/random-recipe/${meal.id}`)}
@@ -120,6 +150,22 @@ const GenerateMealPlanDaily = () => {
               </div>
             </div>
           ))}
+          {totalNutrients && (
+            <div>
+              <h2>Daily Total Values</h2>
+
+              <div className="meal-item">
+                <div className="nutrient-info">
+                  <p>Calories: {totalNutrients.calories.toFixed(2)}</p>
+                  <p>
+                    Carbohydrates: {totalNutrients.carbohydrates.toFixed(2)}
+                  </p>
+                  <p>Fat: {totalNutrients.fat.toFixed(2)}</p>
+                  <p>Protein: {totalNutrients.protein.toFixed(2)}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </main>
       </div>
     </div>

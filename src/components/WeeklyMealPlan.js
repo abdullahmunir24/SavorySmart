@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FIREBASE_AUTH, FIRESTORE_DB } from "../FirebaseConfig";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import Header from "./header";
 import { Link, useNavigate } from "react-router-dom";
 import "./GenerateWeeklyMealPlan.css";
@@ -74,10 +74,9 @@ const GenerateWeeklyMealPlan = () => {
 
         const enrichedMeals = meals.map((meal) => ({
           ...meal,
-          nutrients: nutrients,
         }));
 
-        weeklyPlan.push({ day, meals: enrichedMeals });
+        weeklyPlan.push({ day, meals: enrichedMeals, nutrients });
       }
 
       setWeeklyMealPlan(weeklyPlan);
@@ -85,6 +84,19 @@ const GenerateWeeklyMealPlan = () => {
       console.error("Error generating meal plan:", error);
     }
   };
+
+  const dietOptions = [
+    "Gluten Free",
+    "Ketogenic",
+    "Vegetarian",
+    "Vegetarian with dairy",
+    "Vegetarian with egg",
+    "Vegan",
+    "Vegetarian with fish, seafood",
+    "Meat,vegetables,nuts exculding grains",
+    "Meat,vegetables,including dairy",
+    "Whole Foods",
+  ];
 
   return (
     <div>
@@ -102,13 +114,18 @@ const GenerateWeeklyMealPlan = () => {
             />
           </label>
           <label>
-            Diet (e.g vegetarian, chicken):
-            <input
-              type="text"
+            Diet:
+            <select
               value={diet}
               onChange={(e) => setDiet(e.target.value)}
-              className="input-box"
-            />
+              style={{ color: "black" }}
+            >
+              {dietOptions.map((option) => (
+                <option key={option} value={option.toLowerCase()}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </label>
           <label>
             Exclude from diet (e.g shellfish, olives):
@@ -124,7 +141,7 @@ const GenerateWeeklyMealPlan = () => {
           Generate Weekly Meal Plan
         </button>
 
-        <main>
+        <div className="weekly-carousel">
           {weeklyMealPlan.map((dayPlan) => (
             <div key={dayPlan.day} className="day-plan">
               <h2>{dayPlan.day}</h2>
@@ -145,17 +162,6 @@ const GenerateWeeklyMealPlan = () => {
                     <p>{meal.title}</p>
                     <p>Ready in {meal.readyInMinutes} minutes</p>
                     <p>Servings: {meal.servings}</p>
-                    {meal.nutrients && (
-                      <div className="nutrient-info">
-                        <p>Calories: {meal.nutrients.calories.toFixed(2)}</p>
-                        <p>
-                          Carbohydrates:{" "}
-                          {meal.nutrients.carbohydrates.toFixed(2)}
-                        </p>
-                        <p>Fat: {meal.nutrients.fat.toFixed(2)}</p>
-                        <p>Protein: {meal.nutrients.protein.toFixed(2)}</p>
-                      </div>
-                    )}
                     <button
                       className="button viewRecipeButton"
                       onClick={() => navigate(`/random-recipe/${meal.id}`)}
@@ -164,10 +170,27 @@ const GenerateWeeklyMealPlan = () => {
                     </button>{" "}
                   </div>
                 ))}
+                {dayPlan.nutrients && (
+                  <div>
+                    <h2>Daily Total Values</h2>
+
+                    <div className="meal-item">
+                      <div className="nutrient-info">
+                        <p>Calories: {dayPlan.nutrients.calories.toFixed(2)}</p>
+                        <p>
+                          Carbohydrates:{" "}
+                          {dayPlan.nutrients.carbohydrates.toFixed(2)}
+                        </p>
+                        <p>Fat: {dayPlan.nutrients.fat.toFixed(2)}</p>
+                        <p>Protein: {dayPlan.nutrients.protein.toFixed(2)}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}
-        </main>
+        </div>
       </div>
     </div>
   );

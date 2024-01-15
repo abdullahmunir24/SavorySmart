@@ -61,7 +61,7 @@ const Restaurant = () => {
           setLoading(false);
         });
       } else {
-        console.error("Geolocation is not supported by this browser.");
+        console.error("Location does not work.");
         setLoading(false);
       }
     } catch (error) {

@@ -159,6 +159,17 @@ a{
 	color: white;
 }
 
+.new-content-container{
+	text-align: center;
+	margin-top: 30px; 
+	margin-bottom: 30px; 
+	
+
+  }
+
+  .c-info{
+	color: white;
+  }
 
 @media(max-width:1100px){
 	.map{

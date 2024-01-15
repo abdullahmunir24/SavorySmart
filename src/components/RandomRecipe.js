@@ -45,7 +45,7 @@ const RandomRecipe = () => {
     async function fetchSimilarRecipes() {
       try {
         const { data } = await axios.get(
-          `https://api.spoonacular.com/recipes/${id}/similar?number=2&apiKey=${process.env.REACT_APP_API_KEY_meal}`
+          `https://api.spoonacular.com/recipes/${id}/similar?number=3&apiKey=${process.env.REACT_APP_API_KEY_rest}`
         );
         setSimilar(data);
       } catch (error) {
