@@ -17,7 +17,7 @@ export default function Random() {
   async function fetchRandomRecipes() {
     try {
       const { data } = await axios.get(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY_generate}&number=6`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY_random}&number=6`
       );
       setRandomRecipes(data.recipes);
     } catch (error) {

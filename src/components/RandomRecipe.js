@@ -58,7 +58,7 @@ const RandomRecipe = () => {
         const similarIds = similar.map((r) => r.id);
         const promises = similarIds.map((similarId) =>
           axios.get(
-            `https://api.spoonacular.com/recipes/${similarId}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_meal}`
+            `https://api.spoonacular.com/recipes/${similarId}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_display}`
           )
         );
         const responses = await Promise.all(promises);
@@ -108,26 +108,19 @@ const RandomRecipe = () => {
               <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
                 <div className="flex mb-4">
                   <button
-                    className={`${
-                      t === "ingredients"
-                        ? "border-b-2 border-indigo-500"
-                        : "text-white"
-                    } focus:outline-none`}
+                    className="text-white focus:outline-none"
                     onClick={() => setT("ingredients")}
                   >
                     Ingredients
                   </button>
                   <button
-                    className={`${
-                      t === "instructions"
-                        ? "border-b-2 border-indigo-500"
-                        : "text-gray-600"
-                    } focus:outline-none ml-6`}
+                    className="text-white focus:outline-none ml-6"
                     onClick={() => setT("instructions")}
                   >
                     Nutrients & Instructions
                   </button>
                 </div>
+
                 {t === "ingredients" && (
                   <ul>
                     {recipe.extendedIngredients.map(({ id, original }) => (

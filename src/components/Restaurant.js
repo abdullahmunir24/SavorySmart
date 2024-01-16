@@ -46,7 +46,7 @@ const Restaurant = () => {
           const { latitude, longitude } = position.coords;
 
           const response = await axios.get(
-            "https://api.spoonacular.com/food/restaurants/search",
+            "https://api.spoonacular.com/food/restaurants/search?limit=4",
             {
               params: {
                 cuisine: selectedCuisine,
