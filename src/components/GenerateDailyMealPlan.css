@@ -7,7 +7,8 @@
 
 .controls {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column; 
+  align-items: center; 
   margin-bottom: 20px;
 }
 
@@ -16,6 +17,7 @@ label {
   flex-direction: column;
   align-items: center;
   color: white;
+  margin-bottom: 10px; 
 }
 
 button {
@@ -27,6 +29,7 @@ button {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   cursor: pointer;
+  margin-top: 10px; 
 }
 
 button:hover {
@@ -40,7 +43,7 @@ button:hover {
   box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
   border-radius: 10px;
   background-color: #fff;
-  width: 300px;
+  width: 100%; 
   position: relative;
 }
 
@@ -64,35 +67,46 @@ p {
   margin: 10px 0;
 }
 
-button {
-  margin-top: 10px;
-}
-
 .input-box {
   color: black !important;
   padding: 5px;
   margin: 5px;
 }
 
-@media (max-width: 768px) {
-  .main-heading {
-    font-size: 24px;
-  }
+.weekly-carousel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 
+.day-plan {
+  flex: 1; 
+  margin: 10px;
+  box-sizing: border-box;
+  width: 100%; 
+}
+
+.nutrient-info {
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+
+@media (max-width: 755px) {
   .controls {
-    flex-direction: column;
+    justify-content: space-around; 
   }
 
-  label {
-    margin-bottom: 10px;
-  }
-
-  button {
-    margin-top: 10px;
+  .day-plan {
+    width: 100%; 
+    margin: 10px 0; 
   }
 
   .meal-item {
-    width: 100%;
-    margin: 10px 0;
+    width: 100%; 
+    margin: 10px auto; 
   }
 }

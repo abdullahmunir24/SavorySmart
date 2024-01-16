@@ -154,7 +154,7 @@ const GenerateMealPlanDaily = () => {
             <div>
               <h2>Daily Total Values</h2>
 
-              <div className="meal-item">
+              <div>
                 <div className="nutrient-info">
                   <p>Calories: {totalNutrients.calories.toFixed(2)}</p>
                   <p>

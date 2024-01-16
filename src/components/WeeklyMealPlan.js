@@ -174,7 +174,7 @@ const GenerateWeeklyMealPlan = () => {
                   <div>
                     <h2>Daily Total Values</h2>
 
-                    <div className="meal-item">
+                    <div>
                       <div className="nutrient-info">
                         <p>Calories: {dayPlan.nutrients.calories.toFixed(2)}</p>
                         <p>
