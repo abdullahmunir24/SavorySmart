@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./header.css";
 
 export default function Header() {
   const [word, setWord] = useState("");
@@ -62,7 +63,7 @@ export default function Header() {
 
   return (
     <header
-      className="text-gray-400 bg-gray-900 body-font"
+      className="text-gray-400 bg-gray-900 body-font responsive-header"
       style={{ marginBottom: "-100px" }}
     >
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">

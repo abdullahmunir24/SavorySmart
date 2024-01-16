@@ -58,7 +58,7 @@ const MealPlanner = () => {
               To access the weekly and daily meal planner, you have to create an
               account or log in to an existing account.
             </div>
-            <Link to="/registration">
+            <Link to="/register-user">
               <button className="button signUpButton">
                 <span className="buttonText">Sign Up</span>
               </button>

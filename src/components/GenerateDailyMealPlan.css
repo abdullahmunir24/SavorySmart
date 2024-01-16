@@ -69,8 +69,30 @@ button {
 }
 
 .input-box {
-  color: black !important;  
-  padding: 5px; 
-  margin: 5px; 
+  color: black !important;
+  padding: 5px;
+  margin: 5px;
 }
 
+@media (max-width: 768px) {
+  .main-heading {
+    font-size: 24px;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+
+  .meal-item {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

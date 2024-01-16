@@ -1,0 +1,44 @@
+
+
+.responsive-header {
+    padding-top: 2px;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 10px;
+    }
+  
+    .flex {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .justify-between {
+      justify-content: initial;
+    }
+  
+    .items-center {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+  
+    .ml-4 {
+      margin-left: 0;
+      margin-top: 1rem;
+    }
+  
+    .mr-2 {
+      margin-right: 0;
+      margin-bottom: 0.2rem;
+    }
+  
+    .mt-4 {
+      margin-top: 1rem;
+    }
+  
+    .mb-3 {
+      margin-bottom: 1rem;
+    }
+  }
+  
