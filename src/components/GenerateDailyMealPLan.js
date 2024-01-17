@@ -73,7 +73,7 @@ const GenerateMealPlanDaily = () => {
     "Vegetarian with fish, seafood",
     "Meat,vegetables,nuts exculding grains",
     "Meat,vegetables,including dairy",
-    "Whole Foods",
+    "Whole Food diet",
   ];
 
   return (

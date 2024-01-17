@@ -65,7 +65,7 @@ const GenerateWeeklyMealPlan = () => {
               targetCalories,
               diet,
               exclude,
-              apiKey: `${process.env.REACT_APP_API_KEY_generate}`,
+              apiKey: `${process.env.REACT_APP_API_KEY_generate_weekly}`,
             },
           }
         );
@@ -95,7 +95,7 @@ const GenerateWeeklyMealPlan = () => {
     "Vegetarian with fish, seafood",
     "Meat,vegetables,nuts exculding grains",
     "Meat,vegetables,including dairy",
-    "Whole Foods",
+    "Whole Food diet",
   ];
 
   return (
