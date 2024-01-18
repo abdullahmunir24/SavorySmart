@@ -30,7 +30,7 @@ const RandomRecipe = () => {
     async function fetchRecipe() {
       try {
         const { data } = await axios.get(
-          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_generate}`
+          `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_display}`
         );
         const modifiedSummary = extractSummary(data.summary).replace(
           "spoonacular",
@@ -45,7 +45,7 @@ const RandomRecipe = () => {
     async function fetchSimilarRecipes() {
       try {
         const { data } = await axios.get(
-          `https://api.spoonacular.com/recipes/${id}/similar?number=3&apiKey=${process.env.REACT_APP_API_KEY_similar}`
+          `https://api.spoonacular.com/recipes/${id}/similar?number=3&apiKey=${process.env.REACT_APP_API_KEY_rest}`
         );
         setSimilar(data);
       } catch (error) {
@@ -58,7 +58,7 @@ const RandomRecipe = () => {
         const similarIds = similar.map((r) => r.id);
         const promises = similarIds.map((similarId) =>
           axios.get(
-            `https://api.spoonacular.com/recipes/${similarId}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_simlar}`
+            `https://api.spoonacular.com/recipes/${similarId}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_similar}`
           )
         );
         const responses = await Promise.all(promises);
