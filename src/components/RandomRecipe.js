@@ -58,7 +58,7 @@ const RandomRecipe = () => {
         const similarIds = similar.map((r) => r.id);
         const promises = similarIds.map((similarId) =>
           axios.get(
-            `https://api.spoonacular.com/recipes/${similarId}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_similar}`
+            `https://api.spoonacular.com/recipes/${similarId}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_generate}`
           )
         );
         const responses = await Promise.all(promises);
