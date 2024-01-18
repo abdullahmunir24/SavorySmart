@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./Random.css";
 import { Link, useNavigate } from "react-router-dom";
-import { getDoc, doc } from "firebase/firestore";
-import { FIRESTORE_DB, FIREBASE_AUTH } from "../FirebaseConfig";
 import "./Registration.css";
 
 export default function Random() {
@@ -17,7 +15,7 @@ export default function Random() {
   async function fetchRandomRecipes() {
     try {
       const { data } = await axios.get(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY_random}&number=6`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY_random}&number=9`
       );
       setRandomRecipes(data.recipes);
     } catch (error) {

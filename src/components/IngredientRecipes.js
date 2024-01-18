@@ -17,7 +17,7 @@ export default function IngredientRecipes() {
     async function fetchRecipes() {
       try {
         const { data } = await axios.get(
-          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=3&apiKey=${process.env.REACT_APP_API_KEY_display}`
+          `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=9&apiKey=${process.env.REACT_APP_API_KEY_meal}`
         );
         console.log(data);
         setIngred(data);

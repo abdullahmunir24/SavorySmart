@@ -27,7 +27,7 @@ const RandomRecipe = () => {
   };
 
   useEffect(() => {
-    async function fetchRecipe() {
+    async function fetchData() {
       try {
         const { data } = await axios.get(
           `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_display}`
@@ -37,46 +37,20 @@ const RandomRecipe = () => {
           ""
         );
         setRecipe({ ...data, modifiedSummary });
-      } catch (error) {
-        console.log(error);
-      }
-    }
 
-    async function fetchSimilarRecipes() {
-      try {
-        const { data } = await axios.get(
-          `https://api.spoonacular.com/recipes/${id}/similar?number=3&apiKey=${process.env.REACT_APP_API_KEY_rest}`
+        const { data: similarRecipesData } = await axios.get(
+          `https://api.spoonacular.com/recipes/${id}/similar?number=3&apiKey=${process.env.REACT_APP_API_KEY_similar}`
         );
-        setSimilar(data);
+        setSimilar(similarRecipesData);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
 
-    async function fetchSimilarData() {
-      try {
-        const similarIds = similar.map((r) => r.id);
-        const promises = similarIds.map((similarId) =>
-          axios.get(
-            `https://api.spoonacular.com/recipes/${similarId}/information?includeNutrition=false&apiKey=${process.env.REACT_APP_API_KEY_generate}`
-          )
-        );
-        const responses = await Promise.all(promises);
-        const similarRecipesData = responses.map((response) => response.data);
-        setSimilarData(similarRecipesData);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    fetchData();
+  }, [id]);
 
-    fetchRecipe();
-    fetchSimilarRecipes();
-    if (similar.length > 0) {
-      fetchSimilarData();
-    }
-  }, [id, similar]);
-
-  if (!recipe || !similar || similarData.length !== similar.length) {
+  if (!recipe || !similar) {
     return <div>Loading...</div>;
   }
 
@@ -170,14 +144,9 @@ const RandomRecipe = () => {
             </div>
           </div>
           <div className="flex flex-wrap -m-4">
-            {similarData.map((r) => (
+            {similar.map((r) => (
               <div key={r.id} className="xl:w-1/4 md:w-1/2 p-4">
                 <div className="bg-gray-100 p-6 rounded-lg">
-                  <img
-                    className="h-40 rounded w-full object-cover object-center mb-6 mt-4"
-                    src={r.image}
-                    alt="content"
-                  />
                   <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font"></h3>
                   <Link to={`/random-recipe/${r.id}`}>
                     <h2
