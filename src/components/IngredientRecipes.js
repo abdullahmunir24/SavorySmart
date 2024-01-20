@@ -8,6 +8,7 @@ export default function IngredientRecipes() {
   const { ingredients } = useParams();
   const navigate = useNavigate();
   const [ingred, setIngred] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!ingredients) {
@@ -21,55 +22,56 @@ export default function IngredientRecipes() {
         );
         console.log(data);
         setIngred(data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setIngred([]);
+        setLoading(false);
       }
     }
 
     fetchRecipes();
   }, [ingredients]);
 
-  const handleInformation = (recipeId) => {
-    navigate(`/random-recipe/${recipeId}`);
-  };
-
-  if (!ingred || ingred.length === 0) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       <Header />
-      <div className="work-list">
-        {ingred.map((recipe) => (
-          <div className="work" key={recipe.id}>
-            <img src={recipe.image} alt={recipe.title} />
-            <div className="layer">
-              <h3>{recipe.title}</h3>
-              <h4 style={{ color: "blue" }}>Used Ingredients:</h4>
-              <ul style={{ color: "white" }}>
-                {recipe.usedIngredients.map((ingredient) => (
-                  <li key={ingredient.id}>{ingredient.name}</li>
-                ))}
-              </ul>
-              <h4 style={{ color: "blue" }}>Unused Ingredients:</h4>
-              <ul style={{ color: "white" }}>
-                {recipe.missedIngredients.map((ingredient) => (
-                  <li key={ingredient.id}>{ingredient.name}</li>
-                ))}
-              </ul>
-              <Link to={`/random-recipe/${recipe.id}`}>
-                <button
-                  className="button"
-                  style={{ width: "120px", margin: "-10px 0 0 -20px" }}
-                >
-                  <span className="buttonText">View Recipe</span>
-                </button>
-              </Link>
+      {loading && <div>Loading...</div>}
+      {!loading && (
+        <div>
+          {ingred.length === 0 ? (
+            <div className="text-3xl font-medium mb-2 text-white">
+              Sorry, cannot find recipes for this ingredient. Try searching
+              again.
             </div>
-          </div>
-        ))}
-      </div>
+          ) : (
+            <div className="work-list">
+              {ingred.map((recipe) => (
+                <div className="work" key={recipe.id}>
+                  <img src={recipe.image} alt={recipe.title} />
+                  <div className="layer">
+                    <h3>{recipe.title}</h3>
+                    <h4 style={{ color: "blue" }}>Used Ingredients:</h4>
+                    <ul style={{ color: "white" }}>
+                      {recipe.usedIngredients.map((ingredient) => (
+                        <li key={ingredient.id}>{ingredient.name}</li>
+                      ))}
+                    </ul>
+                    <Link to={`/random-recipe/${recipe.id}`}>
+                      <button
+                        className="button"
+                        style={{ width: "120px", margin: "-10px 0 0 -20px" }}
+                      >
+                        <span className="buttonText">View Recipe</span>
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -8,10 +8,7 @@ export default function DisplayedRecipes() {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const { word } = useParams();
   const navigate = useNavigate();
-
-  const handleDetails = (recipeId) => {
-    navigate(`/random-recipe/${recipeId}`);
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -20,8 +17,11 @@ export default function DisplayedRecipes() {
           `https://api.spoonacular.com/recipes/complexSearch?query=${word}&number=9&apiKey=${process.env.REACT_APP_API_KEY_meal}`
         );
         setSearchedRecipes(data.results);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setSearchedRecipes([]);
+        setLoading(false);
       }
     }
     fetchRecipes();
@@ -30,24 +30,35 @@ export default function DisplayedRecipes() {
   return (
     <div>
       <Header />
-      <div className="work-list">
-        {searchedRecipes.map((recipe) => (
-          <div className="work" key={recipe.id}>
-            <img src={recipe.image} alt={recipe.title} />
-            <div className="layer">
-              <h3>{recipe.title}</h3>
-              <Link to={`/random-recipe/${recipe.id}`}>
-                <button
-                  className="button"
-                  style={{ width: "120px", margin: "-10px 0 0 -20px" }}
-                >
-                  <span className="buttonText">View Recipe</span>
-                </button>
-              </Link>
+      {loading && <div>Loading...</div>}
+      {!loading && (
+        <div>
+          {searchedRecipes.length === 0 ? (
+            <div className="text-3xl font-medium mb-2 text-white">
+              Sorry, no recipes found for this search. Please try again.
             </div>
-          </div>
-        ))}
-      </div>
+          ) : (
+            <div className="work-list">
+              {searchedRecipes.map((recipe) => (
+                <div className="work" key={recipe.id}>
+                  <img src={recipe.image} alt={recipe.title} />
+                  <div className="layer">
+                    <h3>{recipe.title}</h3>
+                    <Link to={`/random-recipe/${recipe.id}`}>
+                      <button
+                        className="button"
+                        style={{ width: "120px", margin: "-10px 0 0 -20px" }}
+                      >
+                        <span className="buttonText">View Recipe</span>
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
